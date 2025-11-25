@@ -1,4 +1,5 @@
-# Ex. No: 17D - Topological Sorting of a DAG
+
+# Ex. No: 17E - Topological Sorting of a DAG
 
 ## AIM:
 To write a Python program to **print topological sorting** of a **Directed Acyclic Graph (DAG)**.
@@ -23,11 +24,44 @@ To write a Python program to **print topological sorting** of a **Directed Acycl
 ## PYTHON PROGRAM
 
 ```
-WRITE YOUR CODE HERE
+def addEdge(u, v):
+	global adj
+	adj[u].append(v)
+
+def DFS(v):
+	global visited, departure, time
+	visited[v] = 1
+	for i in adj[v]:
+		if visited[i] == 0:
+			DFS(i)
+	departure[time] = v
+	time += 1
+
+def topologicalSort():
+    for i in range(V):
+        if visited[i]==0:
+            DFS(i)
+    for i in range(V-1, -1, -1):
+        print(departure[i], end=" ")
+
+if __name__ == '__main__':
+
+	V,time, adj, visited, departure = 6, 0, [[] for i in range(7)], [0 for i in range(7)],[-1 for i in range(7)]
+	addEdge(5, 2)
+	addEdge(5, 0)
+	addEdge(4, 0)
+	addEdge(4, 1)
+	addEdge(2, 3)
+	addEdge(3, 1)
+
+	print("Topological Sort of the given graph is")
+	topologicalSort()
+
 ```
 
 ## OUTPUT
-```
-```
+<img width="764" height="149" alt="image" src="https://github.com/user-attachments/assets/9d3f4eab-10d9-47d6-8bab-fb7cdfa5be74" />
+
 
 ## RESULT
+Hence, The program is successfully executed and the topological sorting of the given Directed Acyclic Graph (DAG) is verified.
